@@ -36,6 +36,12 @@ setCustomerCount((prev) => prev + 1); // 次の人に進む
 setSelectedItems([]); // 選択リセット
 };
 
+// 合計金額を計算
+const totalPrice = selectedItems.reduce((total, itemName) => {
+const item = menu.find((item) => item.name === itemName);
+return total + (item?.price || 0);
+}, 0);
+
 return (
 <div className="App">
 <h1>注文受付</h1>
@@ -56,6 +62,9 @@ onChange={() => handleSelect(item.name)}
 </li>
 ))}
 </ul>
+
+{/* 合計金額表示 */}
+<h3>合計金額: ¥{totalPrice}</h3>
 
 <button onClick={handleSubmit}>注文する</button>
 </div>
